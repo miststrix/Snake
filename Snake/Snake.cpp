@@ -9,8 +9,8 @@
 
 using namespace std;
 
-int width = 48;
-int height = 25;
+const int width = 48;
+const int height = 25;
 bool lose1;
 int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
