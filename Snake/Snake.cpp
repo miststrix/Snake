@@ -14,17 +14,56 @@ const int height = 25;
 bool lose1;
 int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
+int snakeLenght;
+int prevPosx, prevPosy;
+vector<int> tailPosx;
+vector<int> tailPosy;
+vector<int> prevTailPosx;
+vector<int> prevTailPosy;
 
 
 string dir;
 
 void fruitRand();
 
+void prev() {
+	prevPosx = snakePosx;
+	prevPosy = snakePosy;
+}
+
+void prevTailPos() {
+	prevTailPosx.clear();
+	prevTailPosy.clear();
+
+	for (int i = 0; i < snakeLenght; ++i) {
+		prevTailPosx.push_back(tailPosx[i]);
+		prevTailPosy.push_back(tailPosy[i]);
+	}
+}
+
+void tailPos() {
+	tailPosx.clear();
+	tailPosy.clear();
+
+	tailPosx.push_back(prevPosx);
+	tailPosy.push_back(prevPosy);
+
+	for (int i = 0; i < snakeLenght; ++i) {
+		tailPosx.push_back(prevTailPosx[i]);
+		tailPosy.push_back(prevTailPosy[i]);
+	}
+}
+
 void setup() {
 	lose1 = false;
 	snakePosx = width / 2;
 	snakePosy = height / 2;
 	fruitRand();
+	snakeLenght = 0;
+	tailPosx.clear();
+	tailPosy.clear();
+	
+
 }
 
 void input() {
@@ -67,12 +106,15 @@ bool checkFruit() {
 	bool check = false;
 	if (snakePosx == fruitPosx && snakePosy == fruitPosy) {
 		check = true;
+		snakeLenght++;
 	}
+	
 	return check;
 }
 
 void draw() {
 	system("cls");
+	bool a = false;
 	char space = ' ';
 
 		for (int i = 0; i < width; ++i) {    //верхняя граница
@@ -83,23 +125,25 @@ void draw() {
 
 		for (int i = 0; i < height; ++i) {    //центр
 			for (int j = 0; j < width; ++j) {
-				if (j == 0 || j == 1 || j == width - 2 || j == width - 1) {
-					cout << (char)219;
-				}
-				else if (snakePosx == j && snakePosy == i) {
-					cout << 'O';
-				}
-				else if (fruitPosx == j && fruitPosy == i) {
-					cout << 'F';
-				}
+					if (j == 0 || j == 1 || j == width - 2 || j == width - 1) {
+						cout << (char)219;
+					}
+					else if (snakePosx == j && snakePosy == i) {
+						cout << 'O';
+					}
+					else if (fruitPosx == j && fruitPosy == i) {
+						cout << 'F';
+					}
+					else if (prevPosx == j && prevPosy == i) {
+						cout << '*';
+					}
 
-				else{
-					cout << space;
-				}
-				
-				}
-			cout << endl;
+					else {
+						cout << space;
+					}
 			}
+			cout << endl;
+		}
 			
 		for (int i = 0; i < width; ++i) {    //нижняя граница
 			cout << (char)219;
@@ -114,6 +158,7 @@ int main(){
 	while (lose1 == false) {
 		draw();
 		input();
+		prev();
 		if (dir == "up")
 			snakePosy--;
 		if (dir == "down")
@@ -123,6 +168,9 @@ int main(){
 		if (dir == "right")
 			snakePosx += 2;
 
+		prevTailPos();
+		tailPos();
+		
 		if (checkFruit()) {
 			fruitRand();
 		}
