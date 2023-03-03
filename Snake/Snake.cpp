@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const int width = 48;
+const int width = 46;
 const int height = 25;
 bool lose1;
 int snakePosx, snakePosy;
