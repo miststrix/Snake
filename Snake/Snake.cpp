@@ -75,11 +75,6 @@ void draw() {
 	system("cls");
 	char space = ' ';
 
-	
-
-
-
-
 		for (int i = 0; i < width; ++i) {    //верхняя граница
 			cout << (char)219;
 			if (i == width - 1)
@@ -106,16 +101,11 @@ void draw() {
 			cout << endl;
 			}
 			
-		
-
 		for (int i = 0; i < width; ++i) {    //нижняя граница
 			cout << (char)219;
 			if (i == width - 1)
 				cout << endl;
 		}
-
-		
-	
 }
 
 
