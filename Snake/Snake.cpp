@@ -15,7 +15,7 @@ bool lose1;
 int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
 
-
+qwe
 string dir;
 
 void fruitRand();
