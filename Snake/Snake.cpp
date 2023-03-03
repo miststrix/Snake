@@ -14,7 +14,7 @@ const int height = 25;
 bool lose1;
 int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
-qweqrt
+ne amoral
 
 string dir;
 
