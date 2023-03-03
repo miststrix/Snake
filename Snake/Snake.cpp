@@ -61,7 +61,7 @@ void fruitRand() {
 	fruitPosy = random(2, height - 2);
 }
 
-bool checkFruit() { //позиция фрукта x, позиция фрукта y, позиция головы x, позиция головы y
+bool checkFruit() {
 	bool check = false;
 	if (snakePosx == fruitPosx && snakePosy == fruitPosy) {
 		check = true;
