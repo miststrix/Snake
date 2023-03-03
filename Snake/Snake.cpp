@@ -9,13 +9,13 @@
 
 using namespace std;
 
-const int width = 46;
+const int width = 49;
 const int height = 25;
 bool lose1;
 int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
 
-qwe
+
 string dir;
 
 void fruitRand();
@@ -40,7 +40,7 @@ void input() {
 }
 
 void lose() {
-	if (snakePosx == width - 2 || snakePosx == width - 1 || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
+	if (snakePosx == width - 2 || snakePosx == width + 1  || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
 		lose1 = true;
 }
 
@@ -88,8 +88,7 @@ void draw() {
 
 		for (int i = 0; i < height; ++i) {    //центр
 			for (int j = 0; j < width; ++j) {
-				if (j == 0 || j == width - 3) {
-					cout << (char)219;
+				if (j == 0 || j == 1 || j == width - 2 || j == width - 1) {
 					cout << (char)219;
 				}
 				else if (snakePosx == j && snakePosy == i) {
@@ -138,6 +137,6 @@ int main(){
 			fruitRand();
 		}
 		lose();
-		Sleep(500);
+		Sleep(200);
 	}
 }
