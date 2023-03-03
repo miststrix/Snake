@@ -45,12 +45,14 @@ void lose() {
 }
 
 int random(int a, int b) { //число от и до
+	srand(time(NULL));
 	int randNum = rand() % (b - a) + a ;
 	return randNum;
 }
 
 int randomEven(int a, int b) { //число от и до
 	int randNum = 1;
+	srand(time(NULL));
 	while (randNum % 2 != 0)
 		randNum = rand() % (b - a) + a;
 	return randNum;
@@ -61,7 +63,7 @@ void fruitRand() {
 	fruitPosy = random(2, height - 2);
 }
 
-bool checkFruit() { //позиция фрукта x, позиция фрукта y, позиция головы x, позиция головы y
+bool checkFruit() {
 	bool check = false;
 	if (snakePosx == fruitPosx && snakePosy == fruitPosy) {
 		check = true;
