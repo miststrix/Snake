@@ -101,6 +101,16 @@ int randomEven(int a, int b) { //число от и до
 void fruitRand() {
 	fruitPosx = randomEven(2, width - 2);   
 	fruitPosy = random(2, height - 2);
+	while (fruitPosx == snakePosx && fruitPosy == snakePosy) { 
+		fruitPosx = randomEven(2, width - 2);
+		fruitPosy = random(2, height - 2);
+	}
+	for (int i = 0; i < snakeLenght; i++) {
+		while (fruitPosx == tailPosx[i] && fruitPosy == tailPosy[i]) {
+			fruitPosx = randomEven(2, width - 2);
+			fruitPosy = random(2, height - 2);
+		}
+	}
 }
 
 bool checkFruit() {
