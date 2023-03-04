@@ -21,7 +21,7 @@ int tailPosy[100];
 
 
 
-string dir;
+string dir = "";
 
 void fruitRand();
 
@@ -64,13 +64,13 @@ void setup() {
 
 void input() {
 
-		if (GetAsyncKeyState('W'))
+		if (GetAsyncKeyState('W') && (dir == "left" || dir == "right" || dir == ""))
 			dir = "up";
-		else if(GetAsyncKeyState('S'))
+		else if(GetAsyncKeyState('S') && (dir == "left" || dir == "right" || dir == ""))
 			dir = "down";
-		else if (GetAsyncKeyState('A'))
+		else if (GetAsyncKeyState('A') && (dir == "up" || dir == "down" || dir == ""))
 			dir = "left";
-		else if(GetAsyncKeyState('D'))
+		else if(GetAsyncKeyState('D') && (dir == "up" || dir == "down" || dir == ""))
 			dir = "right";
 }
 
