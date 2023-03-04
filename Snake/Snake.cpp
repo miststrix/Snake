@@ -30,28 +30,6 @@ void prev() {
 	prevPosy = snakePosy;
 }
 
-
-
-/*void tailPos() {
-	prevTailPosx.clear();
-	prevTailPosy.clear();
-	for (int i = 0; i < snakeLenght; ++i){
-		prevTailPosx.push_back(tailPosx[i]);
-		prevTailPosy.push_back(tailPosy[i]);
-		}
-
-
-	tailPosx.clear();
-	tailPosy.clear();
-	tailPosx.push_back(prevPosx);
-	tailPosy.push_back(prevPosy);
-
-	for (int i = 1; i < snakeLenght; ++i) {
-		tailPosx.push_back(prevTailPosx[i]);
-		tailPosy.push_back(prevTailPosy[i]);
-	}
-}*/
-
 void tailPos() {
 	int prevPos2x, prevPos2y;
 	int prevPosx = tailPosx[0]; //0 //1 //2 //3
