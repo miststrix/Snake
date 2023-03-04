@@ -32,17 +32,17 @@ void prev() {
 
 void tailPos() {
 	int prevPos2x, prevPos2y;
-	int prevPosx = tailPosx[0]; //0 //1 //2 //3
+	int prevPosx = tailPosx[0];
 	int prevPosy = tailPosy[0]; 
-	tailPosx[0] = snakePosx; //1 //2 //3 //4
+	tailPosx[0] = snakePosx;
 	tailPosy[0] = snakePosy;
 	
 	for (int i = 1; i < snakeLenght; i++) {
-		prevPos2x = tailPosx[i]; //0 //0 //1 //2
+		prevPos2x = tailPosx[i];
 		prevPos2y = tailPosy[i];
-		tailPosx[i] = prevPosx; //0 //1 //2 //3
+		tailPosx[i] = prevPosx;
 		tailPosy[i] = prevPosy;
-		prevPosx = prevPos2x;  //0 //0 //1 //2
+		prevPosx = prevPos2x;
 		prevPosy = prevPos2y;
 
 	}
