@@ -16,10 +16,9 @@ int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
 int snakeLenght;
 int prevPosx, prevPosy;
-vector<int> tailPosx;
-vector<int> tailPosy;
-vector<int> prevTailPosx;
-vector<int> prevTailPosy;
+int tailPosx[100];
+int tailPosy[100];
+
 
 
 string dir;
@@ -31,27 +30,50 @@ void prev() {
 	prevPosy = snakePosy;
 }
 
-void prevTailPos() {
+
+
+/*void tailPos() {
 	prevTailPosx.clear();
 	prevTailPosy.clear();
-
-	for (int i = 0; i < snakeLenght; ++i) {
+	for (int i = 0; i < snakeLenght; ++i){
 		prevTailPosx.push_back(tailPosx[i]);
 		prevTailPosy.push_back(tailPosy[i]);
-	}
-}
+		}
 
-void tailPos() {
+
 	tailPosx.clear();
 	tailPosy.clear();
-
 	tailPosx.push_back(prevPosx);
 	tailPosy.push_back(prevPosy);
 
-	for (int i = 0; i < snakeLenght; ++i) {
+	for (int i = 1; i < snakeLenght; ++i) {
 		tailPosx.push_back(prevTailPosx[i]);
 		tailPosy.push_back(prevTailPosy[i]);
 	}
+}*/
+
+void tailPos() {
+	int prevPos2x, prevPos2y;
+	int prevPosx = tailPosx[0]; //0 //1 //2 //3
+	int prevPosy = tailPosy[0]; 
+	tailPosx[0] = snakePosx; //1 //2 //3 //4
+	tailPosy[0] = snakePosy;
+	
+	for (int i = 1; i < snakeLenght; i++) {
+		prevPos2x = tailPosx[i]; //0 //0 //1 //2
+		prevPos2y = tailPosy[i];
+		tailPosx[i] = prevPosx; //0 //1 //2 //3
+		tailPosy[i] = prevPosy;
+		prevPosx = prevPos2x;  //0 //0 //1 //2
+		prevPosy = prevPos2y;
+
+	}
+}
+
+void backspace(int count)
+{
+	for (int i = 0; i < count; i++)
+		printf_s("\b \b");
 }
 
 void setup() {
@@ -60,10 +82,6 @@ void setup() {
 	snakePosy = height / 2;
 	fruitRand();
 	snakeLenght = 0;
-	tailPosx.clear();
-	tailPosy.clear();
-	
-
 }
 
 void input() {
@@ -81,6 +99,11 @@ void input() {
 void lose() {
 	if (snakePosx == width - 2 || snakePosx == width + 1  || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
 		lose1 = true;
+	for (int i = 0; i < snakeLenght; ++i) {
+		if (snakePosx == tailPosx[i] && snakePosy == tailPosy[i]) {
+			lose1 = true;
+		}
+	}
 }
 
 int random(int a, int b) { //число от и до
@@ -134,12 +157,16 @@ void draw() {
 					else if (fruitPosx == j && fruitPosy == i) {
 						cout << 'F';
 					}
-					else if (prevPosx == j && prevPosy == i) {
-						cout << '*';
-					}
-
 					else {
-						cout << space;
+						bool a = false;
+						for (int k = 0; k < snakeLenght; ++k) {
+							if (tailPosx[k] == j && tailPosy[k] == i) {
+								cout << '*';
+								a = true;
+							}
+						}
+						if(!a)
+							cout << space;
 					}
 			}
 			cout << endl;
@@ -155,10 +182,10 @@ void draw() {
 
 int main(){	
 	setup();
-	while (lose1 == false) {
+	while (!lose1) {
 		draw();
 		input();
-		prev();
+		tailPos();
 		if (dir == "up")
 			snakePosy--;
 		if (dir == "down")
@@ -167,14 +194,10 @@ int main(){
 			snakePosx -= 2;
 		if (dir == "right")
 			snakePosx += 2;
-
-		prevTailPos();
-		tailPos();
-		
 		if (checkFruit()) {
 			fruitRand();
 		}
 		lose();
-		Sleep(200);
+		Sleep(150);
 	}
 }
