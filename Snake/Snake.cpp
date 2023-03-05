@@ -124,7 +124,11 @@ bool checkFruit() {
 }
 
 void draw() {
-	system("cls");
+	HANDLE hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD cd;
+	cd.X = 0;
+	cd.Y = 0;
+	SetConsoleCursorPosition(hd, cd);
 	bool a = false;
 	char space = ' ';
 
