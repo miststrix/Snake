@@ -11,6 +11,8 @@ using namespace std;
 
 const int width = 49;
 const int height = 25;
+const int clsWidth = 120;
+const int clsHeight = 30;
 bool lose1;
 int snakePosx, snakePosy;
 int fruitPosx, fruitPosy;
@@ -18,7 +20,9 @@ int snakeLenght;
 int prevPosx, prevPosy;
 int tailPosx[100];
 int tailPosy[100];
-
+int score;
+int record;
+int countMessage = 0;
 
 
 string dir = "";
@@ -75,7 +79,7 @@ void input() {
 }
 
 void lose() {
-	if (snakePosx == width - 2 || snakePosx == width + 1  || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
+	if (snakePosx == width - 2 || snakePosx == width + 1 || snakePosx == width - 1 || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
 		lose1 = true;
 	for (int i = 0; i < snakeLenght; ++i) {
 		if (snakePosx == tailPosx[i] && snakePosy == tailPosy[i]) {
@@ -118,21 +122,77 @@ bool checkFruit() {
 	if (snakePosx == fruitPosx && snakePosy == fruitPosy) {
 		check = true;
 		snakeLenght++;
+		score += 10;
 	}
 	
 	return check;
 }
 
-void draw() {
+void loseMessage() {
 	system("cls");
+	cout << "You lose!";
+	cout << endl;
+	cout << "Your score: " << score;
+}
+
+void funMessage() {
+
+	if (score == 30) {
+		cout << " Nice!";
+		
+	}
+	if (score == 40) {
+		cout << " Fuck Belolipeckiy!";
+		
+	}
+	if (score == 50) {
+		cout << " Wow!";
+		
+	}
+	if (score == 80) {
+		cout << " Amazing!";
+		
+	}
+	if (score == 150) {
+		cout << " Roma Somow!?";
+		
+	}
+	if (score == 170) {
+		cout << " Esports player?";
+		
+	}
+	if (score == 230) {
+		cout << " 228..";
+		
+	}
+	if (score == 250) {
+		cout << "                           ";
+		cout << " Closing the game...";
+	}
+	if (score == 900) {
+		cout << "                           ";
+		cout << " God of the game!";
+	}
+	else {
+		cout << "                           ";
+	}
+}
+
+void draw() {
+	HANDLE hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD cd;
+	cd.X = 0;
+	cd.Y = 0;
+	SetConsoleCursorPosition(hd, cd);
 	bool a = false;
 	char space = ' ';
 
 		for (int i = 0; i < width; ++i) {    //верхняя граница
 			cout << (char)219;
-			if (i == width - 1)
-				cout << endl;
+			
 		}
+		cout << " Your score: " << score;
+		cout << endl;
 
 		for (int i = 0; i < height; ++i) {    //центр
 			for (int j = 0; j < width; ++j) {
@@ -157,6 +217,8 @@ void draw() {
 							cout << space;
 					}
 			}
+			if (i == 0)
+				funMessage();
 			cout << endl;
 		}
 			
@@ -188,4 +250,5 @@ int main(){
 		lose();
 		Sleep(180);
 	}
+	loseMessage();
 }
