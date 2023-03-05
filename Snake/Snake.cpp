@@ -137,7 +137,7 @@ void draw() {
 		for (int i = 0; i < height; ++i) {    //центр
 			for (int j = 0; j < width; ++j) {
 					if (j == 0 || j == 1 || j == width - 2 || j == width - 1) {
-						cout << (char)219;
+						cout << (char)176;
 					}
 					else if (snakePosx == j && snakePosy == i) {
 						cout << 'O';
@@ -186,6 +186,6 @@ int main(){
 			fruitRand();
 		}
 		lose();
-		Sleep(150);
+		Sleep(180);
 	}
 }
