@@ -23,9 +23,16 @@ int tailPosy[100];
 int score;
 int record;
 int countMessage = 0;
-
-
 string dir = "";
+
+void hidecursor()
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO info;
+	info.dwSize = 100;
+	info.bVisible = FALSE;
+	SetConsoleCursorInfo(consoleHandle, &info);
+}
 
 void fruitRand();
 
@@ -154,7 +161,7 @@ void funMessage() {
 		
 	}
 	if (score == 150) {
-		cout << " Roma Somow!?";
+		cout << " Roma Somov!?";
 		
 	}
 	if (score == 170) {
@@ -203,7 +210,7 @@ void draw() {
 						cout << 'O';
 					}
 					else if (fruitPosx == j && fruitPosy == i) {
-						cout << 'F';
+						cout << "F";
 					}
 					else {
 						bool a = false;
@@ -231,6 +238,8 @@ void draw() {
 
 
 int main(){	
+	system("color 3");
+	hidecursor();
 	setup();
 	while (!lose1) {
 		draw();
@@ -248,7 +257,7 @@ int main(){
 			fruitRand();
 		}
 		lose();
-		Sleep(180);
+		Sleep(170);
 	}
 	loseMessage();
 }
