@@ -210,7 +210,7 @@ void draw() {
 						cout << 'O';
 					}
 					else if (fruitPosx == j && fruitPosy == i) {
-						cout << 'F';
+						cout << "F";
 					}
 					else {
 						bool a = false;
@@ -238,6 +238,7 @@ void draw() {
 
 
 int main(){	
+	system("color 3");
 	hidecursor();
 	setup();
 	while (!lose1) {
@@ -256,7 +257,7 @@ int main(){
 			fruitRand();
 		}
 		lose();
-		Sleep(190);
+		Sleep(170);
 	}
 	loseMessage();
 }
