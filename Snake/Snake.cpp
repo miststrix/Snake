@@ -75,7 +75,7 @@ void input() {
 }
 
 void lose() {
-	if (snakePosx == width - 2 || snakePosx == width + 1  || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
+	if (snakePosx == width - 2 || snakePosx == width + 1 || snakePosx == width - 1 || snakePosx == 0 || snakePosy == -1 || snakePosy == height)
 		lose1 = true;
 	for (int i = 0; i < snakeLenght; ++i) {
 		if (snakePosx == tailPosx[i] && snakePosy == tailPosy[i]) {
