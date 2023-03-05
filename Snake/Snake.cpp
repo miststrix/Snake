@@ -186,6 +186,6 @@ int main(){
 			fruitRand();
 		}
 		lose();
-		Sleep(150);
+		Sleep(190);
 	}
 }
